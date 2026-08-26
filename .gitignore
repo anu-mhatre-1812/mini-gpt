@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+checkpoints/
+data/marathi.txt
+data/*.txt
+.venv/
+venv/
+.DS_Store
+Thumbs.db

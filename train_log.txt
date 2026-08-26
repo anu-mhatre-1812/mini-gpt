@@ -1,0 +1,21 @@
+device: cpu
+corpus: 323,860 chars | vocab: 178
+parameters: 871,680
+step   200 | train 2.7878 | val 2.7277 | lr 2.97e-04 | 270s
+step   400 | train 2.7656 | val 2.6830 | lr 2.87e-04 | 556s
+step   600 | train 2.6462 | val 2.6214 | lr 2.71e-04 | 815s
+step   800 | train 2.5972 | val 2.6897 | lr 2.50e-04 | 1098s
+step  1000 | train 2.5420 | val 2.5931 | lr 2.25e-04 | 1398s
+step  1200 | train 2.4443 | val 2.4578 | lr 1.96e-04 | 1678s
+step  1400 | train 2.4056 | val 2.4161 | lr 1.66e-04 | 1972s
+step  1600 | train 2.2912 | val 2.3001 | lr 1.34e-04 | 2269s
+step  1800 | train 2.2775 | val 2.2979 | lr 1.04e-04 | 2574s
+step  2000 | train 2.1926 | val 2.1763 | lr 7.50e-05 | 2974s
+step  2200 | train 2.1971 | val 2.2172 | lr 4.96e-05 | 3262s
+step  2400 | train 2.1463 | val 2.1376 | lr 2.86e-05 | 3546s
+step  2600 | train 2.1890 | val 2.1556 | lr 1.30e-05 | 3851s
+step  2800 | train 2.0489 | val 2.1565 | lr 3.28e-06 | 4158s
+step  3000 | train 2.1213 | val 2.1718 | lr 0.00e+00 | 4447s
+
+done in 4447s | best val loss: 2.1376
+checkpoint: checkpoints/best.pt
