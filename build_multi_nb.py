@@ -71,6 +71,8 @@ TEACHER_REPEAT = 8
 '''
 
 DATA_CELL = """# Download Marathi Wikipedia + build multi-domain corpus
+import json
+import time
 import urllib.parse
 import urllib.request
 
