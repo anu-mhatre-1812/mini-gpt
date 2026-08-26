@@ -9,6 +9,25 @@ causal multi-head self-attention, MLP blocks, LayerNorm residuals, char-level to
 
 Trained on **Marathi Wikipedia** — and it learned to write Devanagari.
 
+## Multi-domain upgrade 🌐
+
+v2 trained on **5 domains** (teacher-distilled data + Wikipedia):
+Marathi + Hindi + English + Maths patterns + Code.
+
+```
+prompt: "मराठी"      → मराठी दिव जीन जार्ण महाराष्ट्रेच्या लागत...
+prompt: "भारत"       → भारत, इ.स. साम्राज्य... मुंबईत... पुणे...
+prompt: "2 + 2 ="    → 2 + 2 = ...  (format learned ✓)
+prompt: "def add("   → def add(a, b): ...  (structure learned ✓)
+```
+
+**The data-volume lesson:** Marathi (850K chars) generates fluently; the other
+domains (under 1K chars each) show the model *recognized* all languages but
+fluency follows data volume — the same imbalance that shapes real LLMs.
+
+Build the corpus yourself: `python data/build_corpus.py`
+(teacher data lives in `data/*.txt` — add more text per domain to improve it)
+
 ## Sample output (real, after 3000 steps on CPU)
 
 ```
