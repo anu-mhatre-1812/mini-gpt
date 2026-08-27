@@ -1,4 +1,4 @@
-# Mini-GPT 🧠 — GPT from Scratch
+# Mini-GPT — GPT from Scratch
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-FF3EA5?logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.x-FF3EA5?logo=pytorch&logoColor=white)](https://pytorch.org/)
@@ -10,7 +10,27 @@ causal multi-head self-attention, MLP blocks, LayerNorm residuals, char-level to
 
 Trained on **Marathi Wikipedia** — and it learned to write Devanagari.
 
-## Multi-domain upgrade 🌐
+## Quick Start
+
+```bash
+# Clone the repo
+git clone https://github.com/a18-n03/mini-gpt.git
+cd mini-gpt
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Download training data
+python data/download.py
+
+# Train (74 min CPU, ~4 min T4 GPU)
+python train.py --data data/marathi.txt --steps 3000
+
+# Generate text
+python generate.py --prompt "मराठी" --tokens 400
+```
+
+## Multi-domain upgrade
 
 v2 trained on **5 domains** (teacher-distilled data + Wikipedia):
 Marathi + Hindi + English + Maths patterns + Code.
@@ -26,7 +46,7 @@ prompt: "def add("   → def add(a, b): ...  (structure learned ✓)
 domains (under 1K chars each) show the model *recognized* all languages but
 fluency follows data volume — the same imbalance that shapes real LLMs.
 
-## GPU rerun result (teacher data 8x + T4) 🏆
+## GPU rerun result (teacher data 8x + T4)
 
 Same architecture, trained on T4 with teacher data repeated 8x — **massive jump:**
 
@@ -113,6 +133,14 @@ python generate.py --prompt "मराठी" --tokens 400
 `kaggle_mini_gpt.ipynb` — 5-cell notebook, bigger model (6 layers, 384-dim, ~7M params),
 fp16 mixed precision, 5000 steps on T4 in ~12-18 min. Upload to
 [Colab](https://colab.research.google.com) or Kaggle, enable GPU, Run All.
+
+## How to Improve
+
+- Add more training data per domain (especially Hindi/English)
+- Train for more steps (5000+ on GPU)
+- Use a larger model (6 layers, 384-dim)
+- Fine-tune with teacher data at higher repetition (16x, 32x)
+- Add more code examples to the corpus
 
 ## The full journey (why this repo exists)
 

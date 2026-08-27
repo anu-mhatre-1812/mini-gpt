@@ -1,0 +1,34 @@
+===== SAMPLE OUTPUTS (real, after 3000 steps on CPU) =====
+
+----- MARATHI -----
+मराठी अधिक अपेले त्याने प्रतिषांचा त्याताच्या क्त्ररिकेटचे आहे तो किंवरी येळा
+संग्रज्यात आहे. लोके पुरकर व क्षेत्रचा त्या करती असत यांसता परंगत अडक सते त्या
+सहस्थमन्यात खून पन्रकिंवसा पार्वात होते. व्याची पासार १०० लाले आहेत. मुंबईती ली
+प्रभाषेच्या असलेल्ह काही नव्हा आणि लोकपस्थापट्रे रंत्रपला आहे..
+
+----- HINT (after GPU teacher-distillation) -----
+भारत, इ.स. साम्राज्य... मुंबईत... पुणे...
+
+----- MATHS (format learned) -----
+2 + 2 = ...
+3 * 4 = ...
+5 + 3 = ...
+
+----- CODE (structure learned) -----
+def add(a, b):
+    return a + b
+
+def factorial(n):
+    if n <= 1:
+       return 1
+    return n * factorial(n - 1)
+
+===== GPU RESULTS (T4, teacher data 8x) =====
+
+| Domain   | CPU run (no teacher)     | GPU run (teacher 8x)                    |
+|----------|--------------------------|----------------------------------------|
+| Marathi  | broken words             | fluent sentences with dates & places    |
+| Hindi    | Marathi drift            | Hindi-Marathi mixed flow                |
+| English  | letter soup              | verbatim recall of teacher text         |
+| Maths    | format only              | 15/16 equations correct                 |
+| Code     | gibberish                | working recursion (factorial)           |
