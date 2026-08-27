@@ -1,7 +1,8 @@
 # Mini-GPT 🧠 — GPT from Scratch
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-FF3EA5?logo=python&logoColor=white)]()
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.x-FF3EA5?logo=pytorch&logoColor=white)]()
+[![Python](https://img.shields.io/badge/Python-3.10%2B-FF3EA5?logo=python&logoColor=white)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.x-FF3EA5?logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Stars](https://img.shields.io/github/stars/a18-n03/mini-gpt?style=flat&color=FFD700)](https://github.com/a18-n03/mini-gpt/stargazers)
 
 A **GPT-style decoder-only transformer written from scratch in pure PyTorch** — no
 `transformers`, no `nanoGPT` copy-paste. Every component built line by line:
