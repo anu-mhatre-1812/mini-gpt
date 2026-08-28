@@ -1,42 +1,29 @@
----
-title: Mini-GPT
-emoji: 🤖
-colorFrom: blue
-colorTo: purple
-sdk: gradio
-sdk_version: 4.44.1
-app_file: app.py
-pinned: true
-license: apache-2.0
-hardware: gpu-t4
----
+# mini-gpt
 
-# Mini-GPT 🤖
-
-AI Coding Assistant by **Anuj Mhatre**
+GPT-style transformer from scratch in pure PyTorch - char-level, trained on Marathi Wikipedia. No transformers library, every component hand-built.
 
 ## Features
+- Character-level GPT transformer built entirely from scratch
+- Multi-head self-attention mechanism with causal masking
+- Trained on Marathi Wikipedia corpus
+- Positional encoding, layer normalization, and feed-forward networks
+- No HuggingFace transformers library - every component hand-built
+- Training pipeline with gradient clipping and learning rate scheduling
 
-- Code generation in any programming language
-- Code explanation and debugging
-- Algorithm implementation
-- Best practices and optimization tips
+## Tech Stack
+- **Language:** Python
+- **Topics:** attention, from-scratch, gpt, language-model, marathi, pytorch, transformer
 
-## How to Use
+## Quick Start
+```bash
+git clone https://github.com/a18-n03/mini-gpt.git
+cd mini-gpt
+pip install torch numpy
+python train.py
+```
 
-1. Type your coding question in the chat
-2. Mini-GPT will generate code or explain concepts
-3. Ask follow-up questions for clarifications
+## Author
+**Anuj Mhatre** - [GitHub](https://github.com/a18-n03) | [Portfolio](https://anujmhatre.me)
 
-## Examples
-
-- "Write a Python function to reverse a string"
-- "Explain async/await in JavaScript"
-- "How do I create a REST API in Node.js?"
-- "What are you?"
-
-## Built With
-
-- Qwen2.5-Coder-7B (base model)
-- Gradio (interface)
-- Hugging Face Spaces (deployment)
+## License
+MIT
