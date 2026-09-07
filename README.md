@@ -1,85 +1,73 @@
-<div align="center">
+# Mini GPT
 
-# 🧠 Mini GPT
+![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
+![Author: Anuj Mhatre](https://img.shields.io/badge/Author-Anuj%20Mhatre-purple)
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=for-the-badge)](https://github.com/a18-n03/mini-gpt)
+## Why We Built This
 
-GPT-style transformer from scratch in pure PyTorch — char-level, trained on Marathi Wikipedia. No transformers library, every component hand-built.
+Understanding transformers is easier when you build one from scratch. This project implements a minimal GPT-style decoder-only transformer — no HuggingFace `transformers` library, just PyTorch — trained on multilingual text data including Marathi, Hindi, and English.
 
-</div>
+## What It Does
 
----
+A **mini GPT implementation** from scratch using PyTorch — a decoder-only transformer with causal self-attention, trained on multilingual text data. Supports training, text generation, and a FastAPI inference endpoint.
 
-## ✨ Features
+- Decoder-only transformer built from scratch (no transformers library)
+- Causal self-attention with masking
+- Character-level tokenizer
+- Training on custom text data (Marathi, Hindi, English, Code, Math)
+- Text generation with temperature and top-k sampling
+- FastAPI inference API
+- Checkpoint saving/loading
 
-| Feature | Description |
-|---------|-------------|
-| 🔤 Char-Level GPT | Transformer built entirely from scratch |
-| 🎯 Multi-Head Attention | Self-attention with causal masking |
-| 📖 Marathi Corpus | Trained on Marathi Wikipedia |
-| 🧩 Hand-Built Components | No HuggingFace transformers dependency |
-| ⚙️ Training Pipeline | Gradient clipping & LR scheduling |
-| 🏗️ Full Architecture | Positional encoding, layer norm, FFN |
+## How It Was Built
 
----
+| Component | Tech |
+|-----------|------|
+| Model | PyTorch (custom GPT implementation) |
+| Tokenizer | Character-level (custom) |
+| Training | AdamW + CosineAnnealing |
+| API | FastAPI |
+| Data | Marathi, Hindi, English, Code, Math corpora |
 
-## 🛠️ Tech Stack
+**Architecture**: `mini_gpt/model.py` implements the full GPT architecture: `CausalSelfAttention` → `MLP` → `Block` → `GPT`. Character-level tokenizer in `mini_gpt/tokenizer.py`. Training in `train.py`, generation in `generate.py`.
 
-| Technology | Purpose |
-|------------|---------|
-| ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) | Core language |
-| ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white) | Deep learning framework |
-| ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white) | Numerical computing |
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Python 3.10+
-- pip
-
-### Installation
+## Quick Start
 
 ```bash
 git clone https://github.com/a18-n03/mini-gpt.git
 cd mini-gpt
-pip install torch numpy
+pip install -r requirements.txt
+
+# Train the model
+python train.py --data data/marathi.txt --steps 3000
+
+# Generate text
+python generate.py --prompt "मराठी" --tokens 400
+
+# Run the API
+uvicorn api:app --reload
 ```
 
-### Training
-
-```bash
-python train.py
-```
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 mini-gpt/
-├── train.py            # Training pipeline
-├── model.py            # Transformer architecture
-├── requirements.txt    # Python dependencies
-├── LICENSE
-└── README.md
+├── mini_gpt/
+│   ├── model.py           # GPT transformer (from scratch)
+│   └── tokenizer.py       # Character-level tokenizer
+├── train.py               # Training loop
+├── generate.py            # Text generation
+├── api.py                 # FastAPI inference endpoint
+├── data/                  # Training corpora (Marathi, Hindi, English, etc.)
+├── checkpoints/           # Saved model checkpoints
+├── requirements.txt       # Python dependencies
+└── docs/                  # Architecture and deployment docs
 ```
 
----
+## Test Results
 
-## 👨‍💻 Author
-
-**Anuj Mhatre**
-
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/a18-n03)
-[![Portfolio](https://img.shields.io/badge/Portfolio-00C853?style=for-the-badge&logo=googlechrome&logoColor=white)](https://anujmhatre.me)
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+```
+No test suite — this is a training/inference project.
+Tests require GPU training runs.
+```
