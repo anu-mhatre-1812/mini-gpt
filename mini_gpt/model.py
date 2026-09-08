@@ -97,6 +97,9 @@ class GPT(nn.Module):
             loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1))
         return logits, loss
 
+    def count_parameters(self) -> int:
+        return sum(p.numel() for p in self.parameters() if p.requires_grad)
+
     @torch.no_grad()
     def generate(self, idx, max_new_tokens: int, temperature: float = 0.8, top_k: int = 40):
         self.eval()
