@@ -29,6 +29,7 @@ def main():
     ap.add_argument("--steps", type=int, default=3000)
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--lr", type=float, default=3e-4)
+    ap.add_argument("--patience", type=int, default=500, help="Early stopping patience (steps)")
     args = ap.parse_args()
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -48,6 +49,8 @@ def main():
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=args.steps)
 
     best_val = float("inf")
+    patience = 500
+    patience_counter = 0
     t0 = time.time()
     for step in range(1, args.steps + 1):
         model.train()
@@ -69,10 +72,16 @@ def main():
                   f"| lr {sched.get_last_lr()[0]:.2e} | {elapsed:.0f}s")
             if vloss.item() < best_val:
                 best_val = vloss.item()
+                patience_counter = 0
                 Path("checkpoints").mkdir(exist_ok=True)
                 torch.save({"model": model.state_dict(), "stoi": tok.stoi, "itos": tok.itos,
                             "config": {"vocab_size": tok.vocab_size}},
                            "checkpoints/best.pt")
+            else:
+                patience_counter += 200
+                if patience_counter >= patience:
+                    print(f"\nearly stopping at step {step} (no improvement for {patience} steps)")
+                    break
 
     print(f"\ndone in {time.time() - t0:.0f}s | best val loss: {best_val:.4f}")
     print("checkpoint: checkpoints/best.pt")
