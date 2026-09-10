@@ -46,13 +46,19 @@ def main():
     print(f"parameters: {sum(p.numel() for p in model.parameters()):,}")
 
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr)
-    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=args.steps)
+    warmup_steps = min(200, args.steps // 10)
+    sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=args.steps - warmup_steps)
 
     best_val = float("inf")
     patience = 500
     patience_counter = 0
     t0 = time.time()
     for step in range(1, args.steps + 1):
+        # Linear warmup to prevent early training instability
+        if step <= warmup_steps:
+            lr_scale = step / warmup_steps
+            for pg in opt.param_groups:
+                pg["lr"] = args.lr * lr_scale
         model.train()
         x, y = get_batch(train_data, model.block_size, args.batch, device)
         _, loss = model(x, y)
