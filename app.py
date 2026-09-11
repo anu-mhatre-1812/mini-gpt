@@ -40,7 +40,7 @@ demo = gr.ChatInterface(
         "FastAPI template",
         "Decorators in Python",
     ],
-    theme=gr.themes.Soft(),
+
 )
 
 if __name__ == "__main__":
